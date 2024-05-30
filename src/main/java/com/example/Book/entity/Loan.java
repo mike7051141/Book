@@ -14,13 +14,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 public class Loan {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    private Book bookId;
 
     @Column
     private LocalDateTime loanDate;
@@ -37,4 +33,7 @@ public class Loan {
     @Column
     private String borrowerPhoneNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 }
