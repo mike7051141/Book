@@ -41,4 +41,7 @@ public class Book {
 
     @OneToMany(mappedBy = "Book", fetch = FetchType.LAZY)
     private List<Loan> loans;
+
+    @OneToMany(mappedBy = "Book", fetch = FetchType.LAZY)
+    private List<Review> reviews;
 }
