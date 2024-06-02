@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+
+<body>
+
+<h1>도서 목록 페이지</h1>
+<a href="/books/add"> [도서 추가하기] </a>
+
+<form action="books/search" method="get">
+    <label for="searchType">검색 유형:</label>
+    <select id="searchType" name="searchType">
+        <option value="title">제목</option>
+        <option value="author">저자</option>
+    </select>
+    <label for="keyword">검색어:</label>
+    <input type="text" id="keyword" name="keyword" required>
+    <button type="submit">검색</button>
+</form>
+
+<table border="2" style="text-align: center">
+    <tr>
+        <td>책 번호</td>
+        <td>도서 사진</td>
+        <td>도서명</td>
+        <td>저자</td>
+        <td>수정</td>
+        <td>삭제</td>
+    </tr>
+    <tr th:each="m : ${books}">
+        <td> [[${m.id}]] </td>
+        <td> <img th:src="@{${m.image}}" width="50" />  </td>
+        <td> <a th:href="@{books/read/{id}(id=${m.id})}">[[${m.title}]]</a> </td>
+        <td> <a th:href="@{books/read/{id}(id=${m.id})}">[[${m.author}]]</a> </td>
+        <td> <a th:href="@{books/update/{id}(id=${m.id})}">수정</a> </td>
+        <td> <a th:href="@{books/delete/{id}(id=${m.id})}">삭제</a> </td>
+    </tr>
+</table>
+</body>
+</html>

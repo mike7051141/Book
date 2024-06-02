@@ -36,4 +36,8 @@ public class Loan {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> mingi_branch
