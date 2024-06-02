@@ -33,8 +33,8 @@
     <tr th:each="book : ${books}">
         <td> [[${book.id}]] </td>
         <td> <img th:src="@{${book.image}}" width="50" />  </td>
-        <td> <a th:href="@{books/read/{id}(id=${book.id})}">[[${m.title}]]</a> </td>
-        <td> <a th:href="@{books/read/{id}(id=${book.id})}">[[${m.author}]]</a> </td>
+        <td> <a th:href="@{books/read/{id}(id=${book.id})}">[[${book.title}]]</a> </td>
+        <td> <a th:href="@{books/read/{id}(id=${book.id})}">[[${book.author}]]</a> </td>
         <td> <a th:href="@{books/update/{id}(id=${book.id})}">수정</a> </td>
         <td> <a th:href="@{books/delete/{id}(id=${book.id})}">삭제</a> </td>
     </tr>
