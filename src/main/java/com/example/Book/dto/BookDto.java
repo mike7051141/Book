@@ -8,7 +8,9 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BookDto {
+    private long id;
     private String title;
     private String author;
     private String publisher;

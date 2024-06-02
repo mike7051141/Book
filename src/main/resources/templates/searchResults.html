@@ -9,13 +9,22 @@
 
 <h1>검색 결과</h1>
 
-<table border="2">
+<table border="2" style="text-align: center">
+    <tr>
+        <td>책 번호</td>
+        <td>도서 사진</td>
+        <td>도서명</td>
+        <td>저자</td>
+        <td>수정</td>
+        <td>삭제</td>
+    </tr>
     <tr th:each="m : ${books}">
         <td> [[${m.id}]] </td>
-        <td> <img th:src="@{${m.image}}" width="30" />  </td>
-        <td> <a th:href="@{books/read/{id}(id=${m.id})}">[[${m.title}]]</a> </td>
-        <td> <a th:href="@{books/update/{id}(id=${m.id})}">수정</a> </td>
-        <td> <a th:href="@{books/delete/{id}(id=${m.id})}">삭제</a> </td>
+        <td> <img th:src="@{${m.image}}" width="50" />  </td>
+        <td> <a th:href="@{/books/read/{id}(id=${m.id})}">[[${m.title}]]</a> </td>
+        <td> <a th:href="@{/books/read/{id}(id=${m.id})}">[[${m.author}]]</a> </td>
+        <td> <a th:href="@{/books/update/{id}(id=${m.id})}">수정</a> </td>
+        <td> <a th:href="@{/books/delete/{id}(id=${m.id})}">삭제</a> </td>
     </tr>
 </table>
 

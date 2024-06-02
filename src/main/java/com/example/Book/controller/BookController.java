@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/books")
@@ -18,7 +19,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping("/add")
-    public String showAddBookForm(Model model) {
+    public String addBookForm(Model model) {
         model.addAttribute("book", new BookDto());
         return "addBook";
     }
@@ -50,9 +51,28 @@ public class BookController {
         return "searchResults";
     }
 
-    @GetMapping("/delete/{idx}")
-    public  String delete(@PathVariable int idx) {
-        bookService.delete(idx);
+    @GetMapping("/delete/{id}")
+    public  String deleteBook(@PathVariable int id) {
+        bookService.delete(id);
         return "redirect:/books";
     }
+
+    @GetMapping("/read/{id}")
+    public String readBook(@PathVariable("id") long id, Model model) {
+        model.addAttribute("book", bookService.findById(id));
+        return "bookDetail";
+    }
+
+    @GetMapping("/update/{id}")
+    public  String updateBookForm(@PathVariable int id,Model model) {
+        model.addAttribute("book",bookService.findById(id));
+        return "updateBook";
+    }
+
+    @PostMapping("/update")
+    public String updateBook(BookDto bookDto) {
+        bookService.update(bookDto);
+        return "redirect:/books/read/" + bookDto.getId();
+    }
+
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>도서 수정</title>
+</head>
+<body>
+
+<h1>도서 수정</h1>
+
+<form th:action="@{/books/update}" th:object="${book}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
+
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" th:field="*{title}" required><br>
+
+    <label for="author">저자:</label>
+    <input type="text" id="author" name="author" th:field="*{author}" required><br>
+
+    <label for="publisher">출판사:</label>
+    <input type="text" id="publisher" name="publisher" th:field="*{publisher}" required><br>
+
+    <label for="genre">장르:</label>
+    <input type="text" id="genre" name="genre" th:field="*{genre}" required><br>
+
+    <label for="image">이미지 URL:</label>
+    <input type="text" id="image" name="image" th:field="*{image}" required><br>
+
+    <label for="publicationDate">출판일:</label>
+    <input type="date" id="publicationDate" name="publicationDate" th:field="*{publicationDate}" required><br>
+
+    <button type="submit">수정</button>
+</form>
+
+</body>
+</html>

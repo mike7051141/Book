@@ -7,11 +7,7 @@ import com.example.Book.serivce.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +21,12 @@ public class BookServiceImpl implements BookService {
     public ArrayList<Book> findAll() {
         List<Book> books = bookRepository.findAll();
         return new ArrayList<>(books);
+    }
+
+    @Override
+    public Book findById(long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book Id: " + id));
     }
 
     @Override
@@ -49,7 +51,20 @@ public class BookServiceImpl implements BookService {
         book.setAuthor(bookDto.getAuthor());
         book.setPublisher(bookDto.getPublisher());
         book.setGenre(bookDto.getGenre());
-        book.setImage("/images/"+bookDto.getImage());
+        book.setImage(bookDto.getImage().startsWith("/images/") ? bookDto.getImage() : "/images/" + bookDto.getImage());
+        book.setPublicationDate(LocalDate.parse(bookDto.getPublicationDate()));
+        return bookRepository.save(book);
+    }
+
+    @Override
+    public Book update(BookDto bookDto) {
+        Book book = bookRepository.findById(bookDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid book Id: " + bookDto.getId()));
+        book.setTitle(bookDto.getTitle());
+        book.setAuthor(bookDto.getAuthor());
+        book.setPublisher(bookDto.getPublisher());
+        book.setGenre(bookDto.getGenre());
+        book.setImage(bookDto.getImage().startsWith("/images/") ? bookDto.getImage() : "/images/" + bookDto.getImage());
         book.setPublicationDate(LocalDate.parse(bookDto.getPublicationDate()));
         return bookRepository.save(book);
     }
