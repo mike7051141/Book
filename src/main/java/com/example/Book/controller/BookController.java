@@ -1,22 +1,28 @@
 package com.example.Book.controller;
 
 import com.example.Book.dto.BookDto;
+import com.example.Book.dto.ReviewDto;
 import com.example.Book.entity.Book;
+import com.example.Book.entity.Review;
 import com.example.Book.serivce.BookService;
+import com.example.Book.serivce.ReviewService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/books")
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+    private final BookService bookService;
+    private final ReviewService reviewService;
 
     @GetMapping("/add")
     public String addBookForm(Model model) {
@@ -60,7 +66,26 @@ public class BookController {
     @GetMapping("/read/{id}")
     public String readBook(@PathVariable("id") long id, Model model) {
         model.addAttribute("book", bookService.findById(id));
+
+        List<Review> allByBookID = reviewService.findAllByBookID(bookService.findById(id));
+        model.addAttribute("reviews", allByBookID);
+        model.addAttribute("review", new ReviewDto());
         return "bookDetail";
+    }
+
+    @PostMapping("/read/{id}")
+    public String createReview(@PathVariable Long id, Review review, Model model) {
+        ReviewDto reviewDto = new ReviewDto();
+
+        reviewDto.setBookID(bookService.findById(id));
+        reviewDto.setContent(review.getContent());
+        reviewDto.setUserName(review.getUserName());
+
+        Review savedReview = reviewService.saveReview(reviewDto);
+        model.addAttribute("id", id.toString());
+        model.addAttribute("reviews", savedReview);
+
+        return "redirect:/books/read/"+ id;
     }
 
     @GetMapping("/update/{id}")
