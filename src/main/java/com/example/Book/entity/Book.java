@@ -47,10 +47,4 @@ public class Book {
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Review> reviews;
-
-//    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-//    private List<Loan> loans;
-//
-//    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
-//    private List<Review> reviews;
 }

@@ -25,6 +25,7 @@ public class Loan {
     private LocalDateTime returnDate;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @Column
