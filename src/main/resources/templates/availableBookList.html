@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Loanable Books</title>
+</head>
+<body>
+<h1>도서 대여</h1>
+<th:block th:if="${#lists.isEmpty(books)}">
+    <p>현재 대여 가능한 도서가 없습니다.</p>
+    <a th:href="@{/books}">돌아가기</a>
+</th:block>
+<th:block th:unless="${#lists.isEmpty(books)}">
+    <table th:border="1">
+        <thead>
+        <tr>
+            <td>책 번호</td>
+            <td>도서 사진</td>
+            <td>도서명</td>
+            <td>저자</td>
+            <td>대여 상태</td>
+            <td>대여</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td><span th:text="${book.id}"></span></td>
+            <td><img th:src="@{${book.image}}" /></td>
+            <td><a th:text="${book.title}"></a></td>
+            <td><span th:text="${book.author}"></span></td>
+            <td>
+                <span th:if="${book.status == 'AVAILABLE'}">대여 가능</span>
+                <span th:unless="${book.status == 'AVAILABLE'}">대여 중</span>
+            </td>
+            <td><a th:href="@{/loans/add/{id}(id=${book.id})}" th:if="${book.status == 'AVAILABLE'}">대여</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/books}">돌아가기</a>
+</th:block>
+</body>
+</html>

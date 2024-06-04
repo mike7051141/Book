@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Loan</title>
+</head>
+<body>
+<h1>대여 정보 수정</h1>
+<form action="/loans/update" th:object="${loan}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label>
+        <span>대여자 이름 : </span>
+        <input type="text" th:field="*{borrowerName}" /><br/>
+    </label>
+    <br>
+    <label>
+        <span>대여자 전화번호 : </span>
+        <input type="text" th:field="*{borrowerPhoneNumber}" />
+    </label>
+    <br>
+    <label>
+        <span>대여 일자 : </span>
+        <input type="datetime-local" th:field="*{loanDate}" />
+    </label>
+    <br>
+    <label>
+        <span>반납 일자 : </span>
+        <input type="datetime-local" th:field="*{returnDate}" />
+    </label>
+    <br>
+    <label>
+        <span>대여 상태 : </span>
+        <select th:field="*{status}">
+            <option value="AVAILABLE">대여 가능</option>
+            <option value="RENTED">대여 중</option>
+        </select>
+    </label>
+    <br>
+    <label>
+        <span>책 ID : </span>
+        <input type="text" th:field="*{bookId}" readonly="readonly" />
+    </label>
+    <br>
+    <button type="submit">수정하기</button>
+</form>
+<a th:href="@{/loans/history}">돌아가기</a>
+</body>
+</html>
