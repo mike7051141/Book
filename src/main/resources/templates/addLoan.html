@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Loan</title>
+</head>
+<body>
+<h1>도서 대여</h1>
+<form action="/loans/add" method="post">
+    <input type="hidden" id="bookId" name="bookId" th:value="${bookId}"/>
+    <label for="borrowerName">
+        <span>대여자 이름 : </span>
+        <input type="text" id="borrowerName" name="borrowerName" />
+    </label>
+    <br>
+    <label for="borrowerPhoneNumber">
+        <span>대여자 전화번호 : </span>
+        <input type="text" id="borrowerPhoneNumber" name="borrowerPhoneNumber" />
+    </label>
+    <br>
+    <button type="submit">대여하기</button>
+</form>
+<a th:href="@{/loans/list}">돌아가기</a>
+</body>
+</html>
