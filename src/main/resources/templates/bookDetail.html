@@ -33,7 +33,7 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="content">리뷰</label>
+            <label for="content">내용</label>
             <textarea class="form-control" id="content" th:field="*{content}" required></textarea>
         </div>
         <div class="form-group">
@@ -51,7 +51,6 @@
         <table class="table" th:border="2" style="text-align: center">
             <thead>
             <tr>
-                <th>리뷰ID</th>
                 <th>사용자</th>
                 <th>내용</th>
                 <th>평점</th>
@@ -60,7 +59,6 @@
             </thead>
             <tbody>
             <tr th:each="review : ${reviews}">
-                <td th:text="${review.id}"></td>
                 <td th:text="${review.userName}">-</td>
                 <td th:width="300" th:text="${review.content}">-</td>
                 <td th:text="${review.rate}">-</td>

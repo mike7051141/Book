@@ -39,7 +39,7 @@
             <td><span th:text="${loan.borrowerPhoneNumber}"></span></td>
             <td>
                 <span th:if="${loan.status == 'AVAILABLE'}">대여 가능</span>
-                <span th:unless="${loan.status == 'AVAILABLE'}">대여 중</span>
+                <span th:unless="${loan.status == 'AVAILABLE'}">대여중</span>
             </td>
             <td><span th:text="${loan.loanDate}"></span></td>
             <td><span th:text="${loan.returnDate}"></span></td>
