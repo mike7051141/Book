@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Book List</title>
+    <style>
+        a {
+            color: blue;
+            text-decoration-color: blue;
+            text-decoration-style: unset;
+        }
+    </style>
 </head>
 
 <body>
 
 <h1>도서 목록 페이지</h1>
-<a href="/books/add"> [도서 추가하기] </a>
-<a href="/loans/list">[대여 가능 도서]</a>
-<a href="/loans/history">[대여 기록]</a>
+
+<span> <a href="/books/add">도서 추가하기</a> </span>
+<a href="/loans/list">대여 가능 도서</a>
+<a href="/loans/history">대여 기록</a>
 <form action="books/search" method="get">
     <label for="searchType">검색 유형:</label>
     <select id="searchType" name="searchType">
@@ -22,7 +30,7 @@
     <button type="submit">검색</button>
 </form>
 
-<table border="2" style="text-align: center">
+<table th:border="2" style="text-align: center">
     <tr>
         <td>책 번호</td>
         <td>도서 사진</td>

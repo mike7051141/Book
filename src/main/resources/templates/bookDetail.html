@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Detail</title>
+    <style>
+        a {
+            color: blue;
+            text-decoration-color: blue;
+            text-decoration-style: unset;
+        }
+    </style>
 </head>
 <body>
 <h1>도서 상세 페이지</h1>
@@ -18,39 +25,46 @@
 <a href="/books">목록으로 돌아가기</a>
 
 <div class="container">
-    <h1>Write a Review</h1>
+    <h1>리뷰 작성</h1>
     <form th:action="@{'/books/read/' + ${id}}" th:object="${review}" method="post">
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{userName}" placeholder="Enter your name" required>
+            <label for="name">이름</label>
+            <input type="text" class="form-control" id="name" th:field="*{userName}" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="content">리뷰</label>
+            <textarea class="form-control" id="content" th:field="*{content}" required></textarea>
         </div>
         <div class="form-group">
-            <label for="content">Review</label>
-            <textarea class="form-control" id="content" th:field="*{content}" placeholder="Write your review" required></textarea>
+            <label for="rate">평점</label>
+            <input type="text" class="form-control" id="rate" th:field="*{rate}" placeholder="0~10사이의 값을 입력해주세요" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">제출</button>
     </form>
 
-    <h2>All Reviews</h2>
+    <h2>리뷰 목록</h2>
     <div th:if="${#lists.isEmpty(reviews)}">
-        <p>No reviews yet.</p>
+        <p>아직 리뷰가 없습니다.</p>
     </div>
     <div th:unless="${#lists.isEmpty(reviews)}">
-        <table class="table">
+        <table class="table" th:border="2" style="text-align: center">
             <thead>
             <tr>
+                <th>리뷰ID</th>
                 <th>사용자</th>
                 <th>내용</th>
+                <th>평점</th>
                 <th>작성 시간</th>
-                <!-- Add more headers as needed -->
             </tr>
             </thead>
             <tbody>
             <tr th:each="review : ${reviews}">
+                <td th:text="${review.id}"></td>
                 <td th:text="${review.userName}">-</td>
-                <td th:text="${review.content}">-</td>
+                <td th:width="300" th:text="${review.content}">-</td>
+                <td th:text="${review.rate}">-</td>
                 <td th:text="${review.createdAt}">-</td>
-                <!-- Add more cells as needed -->
             </tr>
             </tbody>
         </table>

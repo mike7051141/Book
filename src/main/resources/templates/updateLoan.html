@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Loan</title>
+    <style>
+        a {
+            color: blue;
+            text-decoration-color: blue;
+            text-decoration-style: unset;
+        }
+    </style>
 </head>
 <body>
 <h1>대여 정보 수정</h1>
@@ -20,12 +27,7 @@
     <br>
     <label>
         <span>대여 일자 : </span>
-        <input type="datetime-local" th:field="*{loanDate}" />
-    </label>
-    <br>
-    <label>
-        <span>반납 일자 : </span>
-        <input type="datetime-local" th:field="*{returnDate}" />
+        <input type="text" th:field="*{loanDate}" />
     </label>
     <br>
     <label>

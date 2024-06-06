@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class LoanServiceImpl implements LoanService {
                         .borrowerName(loanDto.getBorrowerName())
                         .borrowerPhoneNumber(loanDto.getBorrowerPhoneNumber())
                         .status(Status.RENTED)
-                        .loanDate(LocalDateTime.now())
+                        .loanDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES))
                         .book(book)
                         .build();
                 loanRepository.save(loan);
@@ -133,7 +134,7 @@ public class LoanServiceImpl implements LoanService {
         Loan loan = loanRepository.findById(loanDto.getId()).orElse(null);
         loan.setBorrowerName(loanDto.getBorrowerName());
         loan.setBorrowerPhoneNumber(loanDto.getBorrowerPhoneNumber());
-        loan.setReturnDate(loanDto.getReturnDate());
+        loan.setReturnDate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         loan.setLoanDate(loanDto.getLoanDate());
         loan.setStatus(Status.valueOf(loanDto.getStatus()));
         loanRepository.save(loan);

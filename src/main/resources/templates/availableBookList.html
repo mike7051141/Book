@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>List of Loanable Books</title>
+    <style>
+        a {
+            color: blue;
+            text-decoration-color: blue;
+            text-decoration-style: unset;
+        }
+    </style>
 </head>
 <body>
 <h1>도서 대여</h1>
@@ -11,7 +18,7 @@
     <a th:href="@{/books}">돌아가기</a>
 </th:block>
 <th:block th:unless="${#lists.isEmpty(books)}">
-    <table th:border="1">
+    <table th:border="2" style="text-align: center">
         <thead>
         <tr>
             <td>책 번호</td>
@@ -25,8 +32,8 @@
         <tbody>
         <tr th:each="book : ${books}">
             <td><span th:text="${book.id}"></span></td>
-            <td><img th:src="@{${book.image}}" /></td>
-            <td><a th:text="${book.title}"></a></td>
+            <td><img th:src="@{${book.image}}" width="50" /></td>
+            <td> <a th:href="@{/books/read/{id}(id=${book.id})}">[[${book.title}]]</a> </td>
             <td><span th:text="${book.author}"></span></td>
             <td>
                 <span th:if="${book.status == 'AVAILABLE'}">대여 가능</span>

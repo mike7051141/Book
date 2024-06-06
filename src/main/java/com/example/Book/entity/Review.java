@@ -27,6 +27,9 @@ public class Review {
     @Column(name = "REVIEW_CONTENT")
     private String content;
 
+    @Column(name = "REVIEW_RATE")
+    private String rate;
+
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
 

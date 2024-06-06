@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Loan List</title>
+    <style>
+        a {
+            color: blue;
+            text-decoration-color: blue;
+            text-decoration-style: unset;
+        }
+    </style>
 </head>
 <body>
 <h1>대여 목록</h1>
@@ -11,7 +18,7 @@
     <a th:href="@{/books}">돌아가기</a>
 </th:block>
 <th:block th:unless="${#lists.isEmpty(loans)}">
-    <table th:border="1">
+    <table th:border="2" style="text-align: center">
         <thead>
         <tr>
             <td>대여 번호</td>

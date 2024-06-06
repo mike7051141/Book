@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ReviewDto {
+    private Long id;
     private String userName;
     private String content;
     private Book bookID;
+    private String rate;
 }

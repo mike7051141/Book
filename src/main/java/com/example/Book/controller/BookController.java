@@ -80,6 +80,7 @@ public class BookController {
         reviewDto.setBookID(bookService.findById(id));
         reviewDto.setContent(review.getContent());
         reviewDto.setUserName(review.getUserName());
+        reviewDto.setRate(review.getRate());
 
         Review savedReview = reviewService.saveReview(reviewDto);
         model.addAttribute("id", id.toString());

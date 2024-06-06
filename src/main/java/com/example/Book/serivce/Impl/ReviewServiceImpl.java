@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -22,8 +23,11 @@ public class ReviewServiceImpl implements ReviewService {
         Review review = new Review();
         review.setUserName(reviewDto.getUserName());
         review.setContent(reviewDto.getContent());
-        review.setCreatedAt(LocalDateTime.now());
+        review.setCreatedAt(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
         review.setBook(reviewDto.getBookID());
+        String rate = reviewDto.getRate();
+        System.out.println("Review rate: " + rate); // 디버그 로그
+        review.setRate(rate + "/10");
 
         return repository.save(review);
     }
